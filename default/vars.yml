@@ -1,0 +1,10 @@
+crowdstrike_alerts_filter_low_severity:
+  type: boolean
+  lib: custom
+  description: Set to true to filter out low severity alerts
+  value: "false"
+crowdstrike_default_splunk_index:
+  type: any
+  lib: custom
+  value: "'crowdstrike'"
+  description: Default index for the Splunk output

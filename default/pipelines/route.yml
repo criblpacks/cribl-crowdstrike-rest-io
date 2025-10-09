@@ -1,0 +1,62 @@
+id: default
+groups: {}
+comments:
+  - id: 5JIyGJ
+    comment: The V1 Alerts API is EOL as of 9/25/2025
+    index: 3
+routes:
+  - id: RZ2q8A
+    name: cribl_crowdstrike_devices_route
+    final: true
+    disabled: false
+    pipeline: cribl_crowdstrike_devices
+    description: Process events from the Devices REST endpoint
+    enableOutputExpression: false
+    outputExpression: null
+    filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-devices-api'
+    clones: []
+    output: default
+  - id: 2cBUSz
+    name: cribl_crowdstrike_vulnerabilities_route
+    final: true
+    disabled: false
+    pipeline: cribl_crowdstrike_vulnerabilities
+    description: Process events from the Vulnerabilities REST endpoint
+    enableOutputExpression: false
+    outputExpression: null
+    filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-vulnerabilities-api'
+    clones: []
+    output: default
+  - id: OoRrF9
+    name: cribl_crowdstrike_alerts_v2_route
+    final: true
+    disabled: false
+    pipeline: cribl_crowdstrike_alerts_v2
+    description: Process events from the Alerts V2 REST endpoint
+    enableOutputExpression: false
+    outputExpression: null
+    filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-alerts-v2-api'
+    clones: []
+    output: default
+  - id: U9Z36S
+    name: cribl_crowdstrike_alerts_v1_route
+    final: true
+    disabled: true
+    pipeline: cribl_crowdstrike_alerts
+    description: Process events from the Alerts REST endpoint
+    enableOutputExpression: false
+    outputExpression: null
+    filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-alerts-api'
+    clones: []
+    output: default
+  - id: default
+    name: default
+    final: true
+    disabled: false
+    pipeline: devnull
+    description: ""
+    enableOutputExpression: false
+    outputExpression: null
+    filter: "true"
+    clones: []
+    output: default
