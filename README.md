@@ -68,10 +68,6 @@ The Pack has the following variables:
 
 ## Upgrades
 
-TBD - initial pipeline-only release.
-
-## Upgrades
-
 Upgrading certain Cribl Packs using the same Pack ID can have unintended consequences. See [Upgrading an Existing Pack](https://docs.cribl.io/stream/packs#upgrading) for details.
 
 ## Release Notes
