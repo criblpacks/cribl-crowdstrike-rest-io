@@ -50,11 +50,11 @@ in_crowdstrike_alerts_v2:
               Date.now()-(60*60*1000*24*30)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
-            value: "application/json"
+            value: "'application/json'"
           - name: Content-Type
-            value: "application/json"
+            value: "'application/json'"
           - name: User-Agent
-            value: "Cribl"
+            value: "'Cribl'"
       collectMethod: post_with_body
       pagination:
         type: response_body
@@ -98,17 +98,17 @@ in_crowdstrike_alerts_v2:
       credentialsSecret: CrowdstrikeAPI
       authRequestHeaders:
         - name: Content-Type
-          value: "application/json"
+          value: "'application/json'"
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
         - name: User-agent
-          value: "Cribl"
+          value: "'Cribl'"
       collectBody: '`{"composite_ids":${JSON.stringify(resources)}}`'
       collectRequestHeaders:
         - name: Content-Type
-          value: "application/json"
+          value: "'application/json'"
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
       authRequestParams:
         - name: client_id
           value: "'YOUR_CLIENT_ID'"
@@ -221,21 +221,21 @@ in_crowdstrike_vulnerabilities:
           value: '"evaluation_logic"'
       collectRequestHeaders:
         - name: Content-Type
-          value: "application/json"
+          value: "'application/json'"
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
       clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
       authRequestParams:
         - name: client_id
           value: "'YOUR_CLIENT_ID'"
       tokenRespAttribute: access_token
       authRequestHeaders:
-        - value: "application/json"
+        - value: "'application/json'"
           name: Content-Type
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
         - name: user_agent
-          value: "Cribl"
+          value: "'Cribl'"
     destructive: false
     encoding: utf8
     type: rest
@@ -303,11 +303,11 @@ in_crowdstrike_alerts:
               Date.now()-(60*60*1000*24*1)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
-            value: "application/json"
+            value: "'application/json'"
           - name: Content-Type
-            value: "application/json"
+            value: "'application/json'"
           - name: User-Agent
-            value: "Cribl"
+            value: "'Cribl'"
       collectMethod: post_with_body
       pagination:
         type: none
@@ -349,11 +349,11 @@ in_crowdstrike_alerts:
       credentialsSecret: CrowdstrikeAPI
       authRequestHeaders:
         - name: Content-Type
-          value: "application/json"
+          value: "'application/json'"
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
         - name: User-agent
-          value: "Cribl"
+          value: "'Cribl'"
       collectBody: '`{"ids":${JSON.stringify(resources)}}`'
       collectRequestHeaders: []
       authRequestParams:
@@ -427,7 +427,7 @@ in_crowdstrike_devices:
             value: "`${offset}`"
         discoverRequestHeaders:
           - name: accept
-            value: "application/json"
+            value: "'application/json'"
         discoverDataField: resources
       collectMethod: get
       pagination:
@@ -473,17 +473,17 @@ in_crowdstrike_devices:
           value: "`${id}`"
       collectRequestHeaders:
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
       clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
       authRequestParams:
         - name: client_id
           value: "'YOUR_CLIENT_ID'"
       tokenRespAttribute: access_token
       authRequestHeaders:
-        - value: "application/json"
+        - value: "'application/json'"
           name: Content-Type
         - name: accept
-          value: "application/json"
+          value: "'application/json'"
     destructive: false
     encoding: utf8
     type: rest
