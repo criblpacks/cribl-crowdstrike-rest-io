@@ -21,12 +21,6 @@ Splunk data is mapped to the following sourcetypes - these are the sourcetypes u
 
 Note: The official Crowdstrike API documentation access requires a support contract.
 
-## About this Pack
-
-A key benefit of the Pack (in the *very* near future!) is to provide pre-defined REST Collector Sources for all three data types. See the Deployment section for details on how to configure them. 
-
-While this Pack does not have pre-configured Destinations, it does provide either OCSF or Splunk as an output format. 
-
 ## Deployment
 
 * This pack is configured by default to use the Worker Group's *Default Destination*.
