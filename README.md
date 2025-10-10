@@ -4,7 +4,7 @@
 
 This pack is built as a complete SOURCE + DESTINATION solution (identified by the IO suffix). Data collection and delivery happen entirely within the pack's context, eliminating the need to connect it to globally defined Sources and Destinations. 
 
-This Pack is designed to collect, process, and output Crowdstrike data via the Crowdstrike REST API. It currently supports the following API's:
+This Pack is designed to collect, process, and output Crowdstrike data via the Crowdstrike REST API. It currently supports the following endpoints:
 * Host/Device Details ([falconpy link](https://www.falconpy.io/Service-Collections/Hosts.html#getdevicedetailsv2))
 * Vulnerabilities ([falconpy link](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#combinedqueryvulnerabilities))
 * Endpoint Alerts ([falconpy link](https://www.falconpy.io/Service-Collections/Alerts.html#postentitiesalertsv1))
@@ -38,7 +38,7 @@ Note: The official Crowdstrike API documentation access requires a support contr
 
 ### Configure Output Format
 
-Each data type can be configured to output data in either OCSF or normalized JSON (Splunk) format. Enable *only one* format for each of the following pipelines:
+Each data type can be configured to output data in either normalized JSON (default), OCSF, or Splunk (`_raw` + Splunk fields) format. Enable *only one* format for each of the following pipelines:
 * `cribl_crowdstrike_devices`
 * `cribl_crowdstrike_vulnerabilities`
 * `cribl_crowdstrike_alerts_v2`
