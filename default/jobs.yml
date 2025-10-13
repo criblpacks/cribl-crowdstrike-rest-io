@@ -98,7 +98,7 @@ in_crowdstrike_alerts_v2:
       credentialsSecret: CrowdstrikeAPI
       authRequestHeaders:
         - name: Content-Type
-          value: "'application/json'"
+          value: "'application/x-www-form-urlencoded'"
         - name: accept
           value: "'application/json'"
         - name: User-agent
@@ -230,7 +230,7 @@ in_crowdstrike_vulnerabilities:
           value: "'YOUR_CLIENT_ID'"
       tokenRespAttribute: access_token
       authRequestHeaders:
-        - value: "'application/json'"
+        - value: "'application/x-www-form-urlencoded'"
           name: Content-Type
         - name: accept
           value: "'application/json'"
@@ -349,7 +349,7 @@ in_crowdstrike_alerts:
       credentialsSecret: CrowdstrikeAPI
       authRequestHeaders:
         - name: Content-Type
-          value: "'application/json'"
+          value: "'application/x-www-form-urlencoded'"
         - name: accept
           value: "'application/json'"
         - name: User-agent
@@ -480,7 +480,7 @@ in_crowdstrike_devices:
           value: "'YOUR_CLIENT_ID'"
       tokenRespAttribute: access_token
       authRequestHeaders:
-        - value: "'application/json'"
+        - value: "'application/x-www-form-urlencoded'"
           name: Content-Type
         - name: accept
           value: "'application/json'"
