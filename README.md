@@ -66,6 +66,9 @@ Upgrading certain Cribl Packs using the same Pack ID can have unintended consequ
 
 ## Release Notes
 
+### Version 1.0.2
+* Collector State Tracking fixes for Alerts and Vulnerabilities
+
 ### Version 1.0.1
 * Collector parameter bug fixes
 

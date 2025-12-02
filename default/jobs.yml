@@ -46,7 +46,7 @@ in_crowdstrike_alerts_v2:
           - name: limit
             value: "1000"
           - name: filter
-            value: "`updated_timestamp:>='${new Date(earliest*1000*300 ||
+            value: "`updated_timestamp:>='${new Date(state.latestTime*1000 ||
               Date.now()-(60*60*1000*24*30)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
@@ -201,8 +201,8 @@ in_crowdstrike_vulnerabilities:
         es/v1'"
       collectRequestParams:
         - name: filter
-          value: "`updated_timestamp:>'${earliest ?
-            C.Time.strftime(earliest,'%Y-%m-%dT%H:%M') :
+          value: "`updated_timestamp:>'${state.latestTime ?
+            C.Time.strftime(state.latestTime,'%Y-%m-%dT%H:%M') :
             C.Time.strftime(Date.now()/1000 -
             86400,'%Y-%m-%dT%H:%M')}'+updated_timestamp:<'${latest ?
             C.Time.strftime(latest,'%Y-%m-%dT%H:%M') :
@@ -299,7 +299,7 @@ in_crowdstrike_alerts:
           - name: limit
             value: "9999"
           - name: filter
-            value: "`updated_timestamp:>'${new Date(earliest*1000*300 ||
+            value: "`updated_timestamp:>'${new Date(state.latestTime*1000 ||
               Date.now()-(60*60*1000*24*1)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
