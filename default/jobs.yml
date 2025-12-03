@@ -119,9 +119,9 @@ in_crowdstrike_alerts_v2:
       authRequestParams:
         - name: client_id
           value: "`${C.vars['crowdstrike_client_id']}`"
-      clientSecretParamValue: changeme
-      username: changeme
-      password: changeme
+      clientSecretParamValue: SET_VARIABLE_INSTEAD
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     type: rest
   input:
@@ -211,7 +211,7 @@ in_crowdstrike_vulnerabilities:
       loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
         crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
         ret']}`"
-      loginBody: '`{ "username": "${username}", "password": "${password}" }`'
+      loginBody: "''"
       getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
@@ -254,8 +254,8 @@ in_crowdstrike_vulnerabilities:
           value: "'application/json'"
         - name: user_agent
           value: "'Cribl'"
-      username: changeme
-      password: changeme
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     encoding: utf8
     type: rest
@@ -363,7 +363,7 @@ in_crowdstrike_alerts:
       loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
         crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
         ret']}`"
-      loginBody: "`client_id=${username}&client_secret=${password}`"
+      loginBody: "''"
       getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
@@ -382,11 +382,10 @@ in_crowdstrike_alerts:
       collectRequestHeaders: []
       authRequestParams:
         - name: client_id
-      clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
           value: "`${C.vars['crowdstrike_client_id']}`"
-      clientSecretParamValue: changeme
-      username: changeme
-      password: changeme
+      clientSecretParamValue: SET_VARIABLE_INSTEAD
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     type: rest
   input:
@@ -490,7 +489,7 @@ in_crowdstrike_devices:
       loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
         crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
         ret']}`"
-      loginBody: '`{ "username": "${username}", "password": "${password}" }`'
+      loginBody: "''"
       getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
@@ -506,7 +505,7 @@ in_crowdstrike_devices:
       collectRequestHeaders:
         - name: accept
           value: "'application/json'"
-      clientSecretParamValue: changeme
+      clientSecretParamValue: SET_VARIABLE_INSTEAD
       authRequestParams:
         - name: client_id
           value: "`${C.vars['crowdstrike_client_id']}`"
@@ -516,8 +515,8 @@ in_crowdstrike_devices:
           name: Content-Type
         - name: accept
           value: "'application/json'"
-      username: changeme
-      password: changeme
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     encoding: utf8
     type: rest

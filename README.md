@@ -70,7 +70,7 @@ Upgrading certain Cribl Packs using the same Pack ID can have unintended consequ
 ## Release Notes
 
 ### Version 1.1.0
-* REST Collectors now rely oin variables for all configuration
+* REST Collectors now rely on variables for all configuration
 * Collector State Tracking and pagination fixes for Alerts and Vulnerabilities
 
 ### Version 1.0.1
