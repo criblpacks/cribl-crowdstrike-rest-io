@@ -27,6 +27,7 @@ functions:
       srcField: _raw
       remove:
         - _raw
+      fieldFilterExpr: value !== '' && value !== null
     description: Parse the fields from the JSON event in _raw
   - id: eval
     filter: "true"

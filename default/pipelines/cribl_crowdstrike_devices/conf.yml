@@ -27,6 +27,7 @@ functions:
       mode: extract
       type: json
       srcField: _raw
+      fieldFilterExpr: value !== '' && value !== null
   - id: eval
     filter: "true"
     disabled: false
