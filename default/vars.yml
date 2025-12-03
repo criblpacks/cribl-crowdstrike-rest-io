@@ -1,3 +1,19 @@
+crowdstrike_base_url:
+  type: string
+  lib: custom
+  description: "REQUIRED: Base URL of your Crowdstrike deployment e.g.
+    https://api.us-2.crowdstrike.com (NO trailing slash!)"
+  value: "'YOUR_BASE_URL'"
+crowdstrike_client_id:
+  type: string
+  lib: custom
+  description: "REQUIRED: Your Crowdstrike API Client ID"
+  value: "'YOUR_CLIENT_ID'"
+crowdstrike_client_secret:
+  type: string
+  lib: custom
+  description: "REQUIRED: Your Crowdstrike API Client Secret"
+  value: "'YOUR_CLIENT_SECRET'"
 crowdstrike_alerts_filter_low_severity:
   type: boolean
   lib: custom

@@ -29,6 +29,7 @@ functions:
       srcField: _raw
       remove:
         - _raw
+      fieldFilterExpr: value !== '' && value !== null
     description: Parse the fields from the JSON event in _raw
   - id: drop
     filter: C.vars.crowdstrike_alerts_filter_low_severity && severity_name=='low'

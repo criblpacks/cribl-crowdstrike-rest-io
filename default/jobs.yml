@@ -34,19 +34,22 @@ in_crowdstrike_alerts_v2:
         discoverType: http
         discoverMethod: get
         pagination:
-          type: response_body
+          type: request_offset
+          offsetField: offset
+          limitField: limit
+          limit: 100
           maxPages: 50
+          zeroIndexed: false
           attribute:
             - offset
           lastPageExpr: offset==""
+          totalRecordField: total
         enableStrictDiscoverParsing: false
         enableDiscoverCode: false
-        discoverUrl: "'https://api.us-2.crowdstrike.com/alerts/queries/alerts/v2'"
+        discoverUrl: "`${C.vars['crowdstrike_base_url']}/alerts/queries/alerts/v2`"
         discoverRequestParams:
-          - name: limit
-            value: "1000"
           - name: filter
-            value: "`updated_timestamp:>='${new Date(earliest*1000*300 ||
+            value: "`updated_timestamp:>='${new Date(state.latestTime*1000 ||
               Date.now()-(60*60*1000*24*30)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
@@ -57,7 +60,7 @@ in_crowdstrike_alerts_v2:
             value: "'Cribl'"
       collectMethod: post_with_body
       pagination:
-        type: response_body
+        type: none
         maxPages: 0
         offsetField: offset
         limitField: limit
@@ -65,13 +68,14 @@ in_crowdstrike_alerts_v2:
         zeroIndexed: false
         attribute:
           - offset
-      authentication: oauth
+      authentication: login
       timeout: 0
       useRoundRobinDns: false
       disableTimeFilter: true
       decodeUrl: true
       rejectUnauthorized: false
       captureHeaders: false
+      stopOnEmptyResults: false
       safeHeaders: []
       retryRules:
         type: backoff
@@ -88,13 +92,16 @@ in_crowdstrike_alerts_v2:
         retryHeaderName: retry-after
       __scheduling:
         stateTracking: {}
-      loginUrl: "'https://api.us-2.crowdstrike.com/oauth2/token'"
+      loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
+        crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
+        ret']}`"
+      loginBody: "''"
+      getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
       clientSecretParamName: client_secret
-      loginBody: "`client_id=${username}&client_secret=${password}`"
       tokenRespAttribute: access_token
-      collectUrl: "'https://api.us-2.crowdstrike.com/alerts/entities/alerts/v2'"
+      collectUrl: "`${C.vars['crowdstrike_base_url']}/alerts/entities/alerts/v2`"
       credentialsSecret: CrowdstrikeAPI
       authRequestHeaders:
         - name: Content-Type
@@ -111,8 +118,10 @@ in_crowdstrike_alerts_v2:
           value: "'application/json'"
       authRequestParams:
         - name: client_id
-          value: "'YOUR_CLIENT_ID'"
-      clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
+          value: "`${C.vars['crowdstrike_client_id']}`"
+      clientSecretParamValue: SET_VARIABLE_INSTEAD
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     type: rest
   input:
@@ -165,18 +174,24 @@ in_crowdstrike_vulnerabilities:
         discoverType: none
       collectMethod: get
       pagination:
-        type: response_body
+        type: request_offset
+        offsetField: after
+        limitField: limit
+        limit: 100
         maxPages: 50
+        zeroIndexed: false
         attribute:
           - after
         lastPageExpr: after==""
-      authentication: oauth
+        totalRecordField: total
+      authentication: login
       timeout: 0
       useRoundRobinDns: false
       disableTimeFilter: false
       decodeUrl: false
       rejectUnauthorized: false
       captureHeaders: true
+      stopOnEmptyResults: false
       safeHeaders: []
       retryRules:
         type: backoff
@@ -193,16 +208,20 @@ in_crowdstrike_vulnerabilities:
         retryHeaderName: retry-after
       __scheduling:
         stateTracking: {}
-      loginUrl: "'https://api.us-2.crowdstrike.com/oauth2/token'"
+      loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
+        crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
+        ret']}`"
+      loginBody: "''"
+      getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
       clientSecretParamName: client_secret
-      collectUrl: "'https://api.us-2.crowdstrike.com/spotlight/combined/vulnerabiliti\
-        es/v1'"
+      collectUrl: "`${C.vars['crowdstrike_base_url']}/spotlight/combined/vulnerabilit\
+        ies/v1`"
       collectRequestParams:
         - name: filter
-          value: "`updated_timestamp:>'${earliest ?
-            C.Time.strftime(earliest,'%Y-%m-%dT%H:%M') :
+          value: "`updated_timestamp:>'${state.latestTime ?
+            C.Time.strftime(state.latestTime,'%Y-%m-%dT%H:%M') :
             C.Time.strftime(Date.now()/1000 -
             86400,'%Y-%m-%dT%H:%M')}'+updated_timestamp:<'${latest ?
             C.Time.strftime(latest,'%Y-%m-%dT%H:%M') :
@@ -224,10 +243,9 @@ in_crowdstrike_vulnerabilities:
           value: "'application/json'"
         - name: accept
           value: "'application/json'"
-      clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
       authRequestParams:
         - name: client_id
-          value: "'YOUR_CLIENT_ID'"
+          value: "`${C.vars['crowdstrike_client_id']}`"
       tokenRespAttribute: access_token
       authRequestHeaders:
         - value: "'application/x-www-form-urlencoded'"
@@ -236,6 +254,8 @@ in_crowdstrike_vulnerabilities:
           value: "'application/json'"
         - name: user_agent
           value: "'Cribl'"
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     encoding: utf8
     type: rest
@@ -294,12 +314,12 @@ in_crowdstrike_alerts:
           type: none
         enableStrictDiscoverParsing: false
         enableDiscoverCode: false
-        discoverUrl: "'https://api.us-2.crowdstrike.com/alerts/queries/alerts/v1'"
+        discoverUrl: "`${C.vars['crowdstrike_base_url']}/alerts/queries/alerts/v1`"
         discoverRequestParams:
           - name: limit
             value: "9999"
           - name: filter
-            value: "`updated_timestamp:>'${new Date(earliest*1000*300 ||
+            value: "`updated_timestamp:>'${new Date(state.latestTime*1000 ||
               Date.now()-(60*60*1000*24*1)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
@@ -316,13 +336,14 @@ in_crowdstrike_alerts:
         limit: 50
         maxPages: 50
         zeroIndexed: false
-      authentication: oauth
+      authentication: login
       timeout: 0
       useRoundRobinDns: false
       disableTimeFilter: true
       decodeUrl: true
       rejectUnauthorized: false
       captureHeaders: false
+      stopOnEmptyResults: false
       safeHeaders: []
       retryRules:
         type: backoff
@@ -339,13 +360,16 @@ in_crowdstrike_alerts:
         retryHeaderName: retry-after
       __scheduling:
         stateTracking: {}
-      loginUrl: "'https://api.us-2.crowdstrike.com/oauth2/token'"
+      loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
+        crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
+        ret']}`"
+      loginBody: "''"
+      getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
       clientSecretParamName: client_secret
-      loginBody: "`client_id=${username}&client_secret=${password}`"
       tokenRespAttribute: access_token
-      collectUrl: "'https://api.us-2.crowdstrike.com/alerts/entities/alerts/v1'"
+      collectUrl: "`${C.vars['crowdstrike_base_url']}/alerts/entities/alerts/v1`"
       credentialsSecret: CrowdstrikeAPI
       authRequestHeaders:
         - name: Content-Type
@@ -358,8 +382,10 @@ in_crowdstrike_alerts:
       collectRequestHeaders: []
       authRequestParams:
         - name: client_id
-          value: "'YOUR_CLIENT_ID'"
-      clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
+          value: "`${C.vars['crowdstrike_client_id']}`"
+      clientSecretParamValue: SET_VARIABLE_INSTEAD
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     type: rest
   input:
@@ -419,12 +445,12 @@ in_crowdstrike_devices:
           lastPageExpr: offset==""
         enableStrictDiscoverParsing: false
         enableDiscoverCode: false
-        discoverUrl: "'https://api.us-2.crowdstrike.com/devices/queries/devices-scroll/v1'"
+        discoverUrl: "`${C.vars['crowdstrike_base_url']}/devices/queries/devices-scroll/v1`"
         discoverRequestParams:
-          - name: limit
-            value: "2"
           - name: offset
             value: "`${offset}`"
+          - name: limit
+            value: "1000"
         discoverRequestHeaders:
           - name: accept
             value: "'application/json'"
@@ -436,13 +462,14 @@ in_crowdstrike_devices:
         attribute:
           - offset
         lastPageExpr: offset==""
-      authentication: oauth
+      authentication: login
       timeout: 0
       useRoundRobinDns: false
       disableTimeFilter: false
       decodeUrl: false
       rejectUnauthorized: false
       captureHeaders: true
+      stopOnEmptyResults: false
       safeHeaders: []
       retryRules:
         type: backoff
@@ -459,14 +486,18 @@ in_crowdstrike_devices:
         retryHeaderName: retry-after
       __scheduling:
         stateTracking: {}
-      loginUrl: "'https://api.us-2.crowdstrike.com/oauth2/token'"
+      loginUrl: "`${C.vars['crowdstrike_base_url']}/oauth2/token?client_id=${C.vars['\
+        crowdstrike_client_id']}&client_secret=${C.vars['crowdstrike_client_sec\
+        ret']}`"
+      loginBody: "''"
+      getAuthTokenFromHeader: false
       authHeaderKey: Authorization
       authHeaderExpr: "`Bearer ${token}`"
       clientSecretParamName: client_secret
-      collectUrl: "'https://api.us-2.crowdstrike.com/devices/entities/devices/v2'"
+      collectUrl: "`${C.vars['crowdstrike_base_url']}/devices/entities/devices/v2`"
       collectRequestParams:
         - name: limit
-          value: "500"
+          value: "1000"
         - name: offset
           value: "`${offset}`"
         - name: ids
@@ -474,16 +505,18 @@ in_crowdstrike_devices:
       collectRequestHeaders:
         - name: accept
           value: "'application/json'"
-      clientSecretParamValue: "'YOUR_CLIENT_SECRET'"
+      clientSecretParamValue: SET_VARIABLE_INSTEAD
       authRequestParams:
         - name: client_id
-          value: "'YOUR_CLIENT_ID'"
+          value: "`${C.vars['crowdstrike_client_id']}`"
       tokenRespAttribute: access_token
       authRequestHeaders:
         - value: "'application/x-www-form-urlencoded'"
           name: Content-Type
         - name: accept
           value: "'application/json'"
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     encoding: utf8
     type: rest
