@@ -10,7 +10,7 @@ crowdstrike_client_id:
   description: "REQUIRED: Your Crowdstrike API Client ID"
   value: "'YOUR_CLIENT_ID'"
 crowdstrike_client_secret:
-  type: string
+  type: encryptedString
   lib: custom
   description: "REQUIRED: Your Crowdstrike API Client Secret"
   value: "'YOUR_CLIENT_SECRET'"

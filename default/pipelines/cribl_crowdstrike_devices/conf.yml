@@ -39,14 +39,6 @@ functions:
         - "*settings_hash"
     description: Remove low-value fields
     groupId: VQH9ac
-  - id: eval
-    filter: "true"
-    disabled: false
-    conf:
-      remove:
-        - device_policies*
-    groupId: VQH9ac
-    description: Remove device_policies array
   - id: comment
     filter: "true"
     disabled: null

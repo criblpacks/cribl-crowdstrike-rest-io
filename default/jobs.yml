@@ -49,8 +49,8 @@ in_crowdstrike_alerts_v2:
         discoverUrl: "`${C.vars['crowdstrike_base_url']}/alerts/queries/alerts/v2`"
         discoverRequestParams:
           - name: filter
-            value: "`updated_timestamp:>='${new Date(state.latestTime*1000 ||
-              Date.now()-(60*60*1000*24*30)).toISOString()}'`"
+            value: "`updated_timestamp:>'${new Date(state.latestTime*1000 ||
+              Date.now()-(60*60*1000*24*7)).toISOString()}'`"
         discoverRequestHeaders:
           - name: Accept
             value: "'application/json'"
@@ -409,7 +409,7 @@ in_crowdstrike_devices:
   removeFields: []
   resumeOnBoot: false
   schedule:
-    cronSchedule: 3 */8 * * *
+    cronSchedule: 3 7 * * *
     maxConcurrentRuns: 1
     skippable: true
     run:

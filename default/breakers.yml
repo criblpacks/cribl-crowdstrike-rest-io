@@ -26,7 +26,7 @@ Crowdstrike API Ruleset:
       jsonTimeField: modified_timestamp
     - condition: _raw.includes("legacy-detects") || _raw.includes('automated_triage')
       type: json_array
-      timestampAnchorRegex: /created_timestamp/
+      timestampAnchorRegex: /updated_timestamp/
       timestamp:
         type: auto
         length: 50

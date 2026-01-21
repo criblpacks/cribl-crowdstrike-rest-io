@@ -38,14 +38,6 @@ functions:
     conf: {}
     description: Filter out low severity alerts
     groupId: XouL2q
-  - id: eval
-    filter: "true"
-    disabled: false
-    conf:
-      remove:
-        - "*_timestamp"
-    description: Remove unneeded/redundant fields
-    groupId: XouL2q
   - id: comment
     filter: "true"
     disabled: null
