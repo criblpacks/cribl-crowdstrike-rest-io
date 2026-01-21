@@ -37,31 +37,22 @@ functions:
     conf: {}
     description: Filter out low severity alerts
     groupId: XouL2q
-  - id: eval
-    filter: "true"
-    disabled: false
-    conf:
-      remove:
-        - "*_id"
-        - "*_timestamp"
-    description: Remove unneeded/redundant fields
-    groupId: XouL2q
   - id: comment
     filter: "true"
-    disabled: null
+    disabled: true
     conf:
       comment: Enable to output OCSF (Amazon Security Lake)
     groupId: gFfQIq
   - id: chain
     filter: "true"
-    disabled: false
+    disabled: true
     conf:
       processor: cribl_crowdstrike_alerts_ocsf
     description: Map to OCSF Detection Finding (2004) Class
     groupId: gFfQIq
   - id: comment
     filter: "true"
-    disabled: null
+    disabled: true
     conf:
       comment: Output to Splunk
     groupId: gFfQIq

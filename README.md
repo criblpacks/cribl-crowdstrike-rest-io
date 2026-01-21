@@ -69,6 +69,10 @@ Upgrading certain Cribl Packs using the same Pack ID can have unintended consequ
 
 ## Release Notes
 
+### Version 1.1.1
+* Event Breaker timestamp fix for Alerts
+* Alerts pipeline - don't remove additional timestamps
+
 ### Version 1.1.0
 * REST Collectors now rely on variables for all configuration
 * Collector State Tracking and pagination fixes for Alerts and Vulnerabilities
