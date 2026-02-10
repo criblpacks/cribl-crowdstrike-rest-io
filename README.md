@@ -69,6 +69,9 @@ Upgrading certain Cribl Packs using the same Pack ID can have unintended consequ
 
 ## Release Notes
 
+### Version 1.1.2
+* Alerts V2 Event Breaker Filter correction
+
 ### Version 1.1.1
 * Event Breaker timestamp fix for Alerts
 * Updated Alerts V2 Discovery Filter to eliminate duplicate ingestion
