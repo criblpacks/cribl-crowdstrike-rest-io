@@ -41,6 +41,23 @@ Crowdstrike API Ruleset:
       eventBreakerRegex: /[\n\r]+(?!\s)/
       name: Crowdstrike_Alerts
       jsonArrayField: resources
+    - condition: _raw.includes("composite_id") || _raw.includes('aggregate_id')
+      type: json_array
+      timestampAnchorRegex: /updated_timestamp/
+      timestamp:
+        type: auto
+        length: 50
+      timestampTimezone: UTC
+      timestampEarliest: -420weeks
+      timestampLatest: +1week
+      maxEventBytes: 134217728
+      disabled: false
+      parserEnabled: false
+      shouldUseDataRaw: false
+      jsonExtractAll: false
+      eventBreakerRegex: /[\n\r]+(?!\s)/
+      jsonArrayField: resources
+      name: Crowdstrike_Alerts_v2
     - condition: true || _raw.includes('vulnerability_id') ||
         source.includes('vulnerabilities')
       type: json_array
