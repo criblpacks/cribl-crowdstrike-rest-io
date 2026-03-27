@@ -15,7 +15,8 @@ routes:
     outputExpression: null
     filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-devices-api'
     clones: []
-    output: default
+    targetContext: group
+    output: __group
   - id: 2cBUSz
     name: cribl_crowdstrike_vulnerabilities_route
     final: true
@@ -26,7 +27,8 @@ routes:
     outputExpression: null
     filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-vulnerabilities-api'
     clones: []
-    output: default
+    targetContext: group
+    output: __group
   - id: OoRrF9
     name: cribl_crowdstrike_alerts_v2_route
     final: true
@@ -37,7 +39,8 @@ routes:
     outputExpression: null
     filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-alerts-v2-api'
     clones: []
-    output: default
+    targetContext: group
+    output: __group
   - id: U9Z36S
     name: cribl_crowdstrike_alerts_v1_route
     final: true
@@ -48,7 +51,8 @@ routes:
     outputExpression: null
     filter: __packsource == 'cribl-crowdstrike-rest-io.crowdstrike-alerts-api'
     clones: []
-    output: default
+    targetContext: group
+    output: __group
   - id: default
     name: default
     final: true
@@ -59,4 +63,5 @@ routes:
     outputExpression: null
     filter: "true"
     clones: []
-    output: default
+    targetContext: group
+    output: __group
