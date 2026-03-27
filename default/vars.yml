@@ -13,7 +13,7 @@ crowdstrike_client_secret:
   type: encryptedString
   lib: custom
   description: "REQUIRED: Your Crowdstrike API Client Secret"
-  value: "'YOUR_CLIENT_SECRET'"
+  value: "YOUR_CLIENT_SECRET"
 crowdstrike_alerts_filter_low_severity:
   type: boolean
   lib: custom
